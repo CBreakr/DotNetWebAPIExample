@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using Microsoft.EntityFrameworkCore;
+
 using Commander.Data;
 
 namespace Commander
@@ -29,7 +31,11 @@ namespace Commander
         {
             services.AddControllers();
             // dependency injection
-            services.AddScoped<ICommanderRepo, MockCommanderRepo>();
+
+            services.AddDbContext<CommanderContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CommanderConnection")));
+
+            // services.AddScoped<ICommanderRepo, MockCommanderRepo>();
+            services.AddScoped<ICommanderRepo, SqlCommanderRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

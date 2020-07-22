@@ -1,17 +1,24 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Commander.Models
 {
     public class Command
     {
+        [Key]
         public int Id { get; set; }
+
+        [Required]
         public string HowTo { get; set; }
+        [Required]
         public string Line { get; set; }
+        [Required]
         public string Platform { get; set; }
 
-        public Command(int id, string howto, string line, string platform){
-            Id = id;
-            HowTo = howto;
-            Line = line;
-            Platform = platform;
+        public Command(int Id, string HowTo, string Line, string Platform){
+            this.Id = Id;
+            this.HowTo = HowTo;
+            this.Line = Line;
+            this.Platform = Platform;
         }
     }
 }
